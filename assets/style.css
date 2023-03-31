@@ -1,0 +1,35 @@
+header {
+    width: 100%;
+    background-color: aqua;
+    border: solid 3px blue;
+    height: 100px;
+}
+
+header h1 {
+    padding: 1.2%;
+    font-size: 40px;
+    text-align: center;
+}
+
+.herosearch {
+    width: 25%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    margin-left: 37.5%;
+}
+
+.herofav {
+    border: solid 3px black;
+    background-color: bisque;
+    margin-left: 2%;
+    margin-right: 1%;
+    height: 650px;
+
+}
+
+.heroother {
+    border: solid 3px black;
+    background-color: bisque;
+    margin-left: 1%;
+    margin-right: 1%;
+}
