@@ -1,3 +1,11 @@
+const stars= document.querySelectorAll('.stars a');
+stars.forEach((star, idx) => { 
+    star.addEventListener('click', ()=>{
+        console.log('star of index ${idx} was clicked');
+        //
+    });
+});
+
 var favorites = $("#favorites")
 var forecast = $("#forecast")
 var events = $("#events")

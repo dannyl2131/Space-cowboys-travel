@@ -33,7 +33,20 @@ header h1 {
     margin-left: .5%;
     margin-right: .5%;
 }
-
+.stars{
+    display:flex;
+}
+.stars a{
+    opacity: 50%;
+    cursor:pointer;
+    padding:3px;
+}
+.stars:hover a{
+opacity: 100%;
+}
+.stars a:hover ~ a {
+    opacity:50%
+}
 @media screen and (max-width: 760px) {
     .heroseven {
         display: none;
