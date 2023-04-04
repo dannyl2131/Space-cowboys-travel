@@ -1,8 +1,22 @@
 const star= $("#star")
 
-star.click(function(){
-    console.log(query.val())
+//For adding as favorite
+
+var recentcity = [];
+
+$("#searchButton").click(function(event) {
+    event.preventDefault();
+    recentcity = $('#query').val();
 })
+
+$("#star").click(function(event) {
+    event.preventDefault();
+    console.log(recentcity);
+})
+
+
+
+
 
 let favorites = $("#favorites")
 let forecast = $("#forecast")
