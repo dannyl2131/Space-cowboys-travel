@@ -26,6 +26,7 @@ let query = $("#query")
 
 $("#searchButton").click(function(){
     weatherSearch(query.val());
+    eventSearch(query.val());
 })
 
 
@@ -300,8 +301,7 @@ const allcities = [
 
 
 
-$('#searchButton').click(function(event) {
-    event.preventDefault();
+let eventSearch = function() {
     console.log("i kind of work");
     for (var i = 0; i < allcities.length; i++) {
         var tempcityname = $('#query').val().toLowerCase();
@@ -317,10 +317,6 @@ $('#searchButton').click(function(event) {
                     console.log(data._embedded.events);
                     console.log(data);
                     var tempevent = [];
-                    let newdiv = document.createElement("div");
-                    let newtext = document.createElement("p");
-
-                    newdiv.classList.add("column");
                     for (var i = 0; i < 30; i++) {
                         if (i === 0) {
                             tempevent.push(data._embedded.events[i].name);
@@ -331,9 +327,6 @@ $('#searchButton').click(function(event) {
                                     data._embedded.events.splice(i, 1);
                                 } else {
                                     tempevent.push(data._embedded.events[i].name);
-                                    $("#events").append(newdiv);
-                                    let newtext = data._embedded.events[i].name
-                                    newdiv.append(newtext);
                                 }
                             }
                         console.log(tempevent);    }
@@ -342,8 +335,13 @@ $('#searchButton').click(function(event) {
             console.log("not a valid city");
         }
     }
+}
+
+
+// for on load example 
+
+window.addEventListener('load', function() {
+    weatherSearch("salt lake city");
+    eventSearch("salt lake city");
 })
-
-
-//
 

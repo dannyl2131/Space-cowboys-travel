@@ -3,7 +3,9 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   line-height: 1.5;
-  background-image: url();
+  background-image: url(/images/pexels-photo-3700369.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -13,6 +15,7 @@ header {
     height: 100px;
     background-color: #162c4c;
     color: #00FFFF;
+    
 }
 
 .h1-title {
@@ -22,6 +25,8 @@ header {
     background-color: #162c4c;
     font-family: 'oswald', sans-serif; 
   font-family: 'Roboto', sans-serif;
+  text-shadow: 0px 0 , 0 0px , 0px 0 #CB2D6F, 3px -4px #CB2D6F;
+  
 }
 .h1-fav {
     font-size: 40px;
@@ -30,6 +35,7 @@ header {
     text-align: center;
     padding: 5%;
     color: #00FFFF;
+    text-shadow: 3px 0 black, 0 3px black, 0px 0 black , 3px -2px black;
 }
 .h2-forecast {
     font-size: 30px;
@@ -38,15 +44,19 @@ header {
     text-align: center;
     padding: 2%;
     color: #00FFFF;
+    text-shadow: 3px 0 black, 0 3px black, 0px 0 black , 3px -2px black;
 }
 .forecast-text{
     font-size: 9px;
     font-family: 'oswald', sans-serif; 
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     padding: 2%;
+    color:#00FFFF;
+    text-shadow: 3px 0 black, 0 3px black, 0px 0 black , 3px -2px black;
     
 }
+
 .herosearch {
     width: 25%;
     margin-top: 4%;
