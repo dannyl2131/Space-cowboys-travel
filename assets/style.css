@@ -1,16 +1,52 @@
+body {
+  font-family: 'oswald', sans-serif; 
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-image: url();
+}
+
+
 header {
     width: 100%;
-    background-color: aqua;
-    border: solid 3px blue;
+    border: solid 3px black;
     height: 100px;
+    background-color: #162c4c;
+    color: #00FFFF;
 }
 
-header h1 {
-    padding: 1.2%;
-    font-size: 40px;
+.h1-title {
+    padding: 2%;
+    font-size: 50px;
     text-align: center;
+    background-color: #162c4c;
+    font-family: 'oswald', sans-serif; 
+  font-family: 'Roboto', sans-serif;
 }
-
+.h1-fav {
+    font-size: 40px;
+    font-family: 'oswald', sans-serif; 
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 5%;
+    color: #00FFFF;
+}
+.h2-forecast {
+    font-size: 30px;
+    font-family: 'oswald', sans-serif; 
+  font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 2%;
+    color: #00FFFF;
+}
+.forecast-text{
+    font-size: 9px;
+    font-family: 'oswald', sans-serif; 
+  font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 2%;
+    
+}
 .herosearch {
     width: 25%;
     margin-top: 4%;
@@ -20,18 +56,19 @@ header h1 {
 
 .herofav {
     border: solid 3px black;
-    background-color: bisque;
+    background-color: #162c4c;
     margin-left: 2%;
     margin-right: 1%;
     height: 650px;
-
+color:#00FFFF ;
 }
 
 .heroother {
     border: solid 3px black;
-    background-color: bisque;
+    background-color: #162c4c;
     margin-left: .5%;
     margin-right: .5%;
+    
 }
 
 #star {
@@ -40,14 +77,14 @@ header h1 {
     font-size: 200%;
 }
 
-.Stars{
+.star{
     opacity: 50%;
     cursor:pointer;
     padding:4px;
     display:flex;
     position: static;
 }
-.Stars:hover{
+#star:hover{
 opacity: 100%;
 }
 

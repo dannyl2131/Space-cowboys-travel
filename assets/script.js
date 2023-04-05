@@ -31,20 +31,28 @@ $("#searchButton").click(function(){
 
 let weatherSearch = function(param){
     forecast.empty()
+    events.empty()
     fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + param + "&units=imperial&appid=7cfd96e09578686d48a4d422e2ebfb44")
     .then(function(response){
         return response.json();
     })
     .then(function(data){
         let weatherData = $(data)
-        let firstSix = weatherData[0].list.slice(0,6)
+        let firstSix = []
+        for(let i = 0; i < 40; i+=7){
+            firstSix.push(weatherData[0].list[i])
+        }
         firstSix.forEach(function(item){
+            const unixTimestamp = item.dt
+            const milliseconds = unixTimestamp * 1000
+            const dateObject = new Date(milliseconds)
             let div1 = document.createElement("div")
             let div2 = document.createElement("div")
             let div3 = document.createElement("div")
             let div4 = document.createElement("div")
             let div5 = document.createElement("div")
             let div6 = document.createElement("div")
+            let date = document.createElement("h2")
             let icon = document.createElement("i")
             let temperature = document.createElement("h2")
             let wind = document.createElement("h2")
@@ -60,10 +68,12 @@ let weatherSearch = function(param){
             div3.append(div4)
             div3.append(div5)
             div3.append(div6)
+            div6.append(date)
             div6.append(icon)
             div6.append(temperature)
             div6.append(wind)
-            temperature.innerHTML = "Temperature: " + item.main.temp + "F"
+            date.innerHTML = dateObject.toLocaleDateString()
+            temperature.innerHTML = "Temp: " + item.main.temp + "F"
             wind.innerHTML = "Wind speed: "  + item.wind.speed + "MPH"
             icon.innerHTML = "<img src=https://openweathermap.org/img/wn/" + item.weather[0].icon + "@2x.png>"
         })
@@ -305,23 +315,35 @@ $('#searchButton').click(function(event) {
                 })
                 .then(function(data) {
                     console.log(data._embedded.events);
+                    console.log(data);
                     var tempevent = [];
-                    for (var i = 0; i < 10; i++) {
-                        if (i === 0) {
-                            tempevent.unshift(data._embedded.events[i].name);
-                        }
-                        else if (data._embedded.events[i].name === data._embedded.events[i-1].name) {
-                            data._embedded.events.splice(i, 1);
-                            i--;
-                        } else {
-                            tempevent.unshift(data._embedded.events[i].name);
-                        }
-                    } console.log(tempevent);
+                    let newdiv = document.createElement("div");
+                    let newtext = document.createElement("p");
 
+                    newdiv.classList.add("column");
+                    for (var i = 0; i < 30; i++) {
+                        if (i === 0) {
+                            tempevent.push(data._embedded.events[i].name);
+                            continue;
+                        }  
+                            for (var j = 0; j < tempevent.length; j++) {
+                                if (tempevent.includes(data._embedded.events[i].name)) {
+                                    data._embedded.events.splice(i, 1);
+                                } else {
+                                    tempevent.push(data._embedded.events[i].name);
+                                    $("#events").append(newdiv);
+                                    let newtext = data._embedded.events[i].name
+                                    newdiv.append(newtext);
+                                }
+                            }
+                        console.log(tempevent);    }
                 })
         } else {
             console.log("not a valid city");
         }
     }
 })
+
+
+//
 
