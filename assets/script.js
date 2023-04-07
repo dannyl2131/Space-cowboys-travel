@@ -1,34 +1,125 @@
-const star= $("#star")
-
-//For adding as favorite
-
-var recentcity = [];
-
-$("#searchButton").click(function(event) {
-    event.preventDefault();
-    recentcity = $('#query').val();
-})
-
-$("#star").click(function(event) {
-    event.preventDefault();
-    console.log(recentcity);
-})
-
-
-
-
-
+let reset = $("#reset")
 let favorites = $("#favorites")
 let forecast = $("#forecast")
 let events = $("#events")
 let search = $("#searchButton")
 let query = $("#query")
 
-$("#searchButton").click(function(){
-    weatherSearch(query.val());
-    eventSearch(query.val());
+//For adding as favorite
+
+var recentcity = [];
+
+// $("#searchButton").click(function(event) {
+//     event.preventDefault();
+//     recentcity = $('#query').val();
+//     $('#cityname').text($('#query').val());
+// })
+
+let getLocalStorage = function(){
+    var tempStorage = localStorage.getItem("favorites")
+    if(tempStorage == undefined){
+        localStorage.setItem("favorites", '["Boston"]')
+    } 
+    return JSON.parse(localStorage.getItem("favorites"))
+}
+
+
+
+$("#star").click(function(event) {
+    event.preventDefault();
+    var favcities = getLocalStorage("")
+    favcities.push($('#query').val());
+    localStorage.setItem('favorites', JSON.stringify(favcities));
+    let localcitycard = document.createElement("div");
+    let localcityname = document.createElement("a");
+
+    localcitycard.classList.add("item");
+    localcityname.classList.add("favlinks");
+
+    localcitycard.appendChild(localcityname);
+
+    $('#favorites').append(localcitycard);
+    localcityname.append($('#query').val());
 })
 
+  
+
+
+
+// reset.click(function(){
+//     favcities = ""
+//     localStorage.setItem("favorites", favcities)
+// })
+
+
+
+
+
+
+let eventSearch = function(param) {
+    param = param.toLowerCase()
+    for (var i = 0; i < allcities.length; i++) {
+        var tempcityname = param
+        if (tempcityname === allcities[i].name) {
+            citynum = allcities[i].number;
+            fetch("https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=" + citynum + "&apikey=IsHdraDgQ6AybSMTXCgWdC4WQFWUkgBn")
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    var tempevent = [];
+                    console.log(data)
+                    var eventObject = []
+                    for (var i = 0; i < 30; i++) {
+                        if (i === 0) {
+                            tempevent.push(data._embedded.events[i].name);
+                            eventObject.push(data._embedded.events[i])
+                            continue;
+                        }  
+                        for (var j = 0; j < data._embedded.events.length; j++) {
+                            if (tempevent.includes(data._embedded.events[j].name)) {
+                                data._embedded.events.splice(i, 1);
+                            } else {
+                                tempevent.push(data._embedded.events[j].name);
+                                eventObject.push(data._embedded.events[j])
+                            }
+                        }
+                    }
+                        for(var k = 0; k < 6; k++){
+                            let currentEvent = eventObject.splice(0,1)
+                            let div1 = document.createElement("div")
+                            let div2 = document.createElement("div")
+                            let div3 = document.createElement("div")
+                            let div4 = document.createElement("div")
+                            let div5 = document.createElement("div")
+                            let div6 = document.createElement("div")
+                            let date = document.createElement("h2")
+                            let name = document.createElement("h2")
+                            let url = document.createElement("a")
+                            events.append(div1)
+                            div1.classList.add("column")
+                            div2.classList.add("ui")
+                            div2.classList.add("card")
+                            div3.classList.add("content")
+                            div4.classList.add("header")
+                            div5.classList.add("description")  
+                            div1.append(div2)
+                            div2.append(div3)
+                            div3.append(div4)
+                            div3.append(div5)
+                            div3.append(div6)
+                            div6.append(name)
+                            div6.append(date)
+                            div6.append(url)
+                            name.innerHTML = "Event name: " + currentEvent[0].name
+                            date.innerHTML = "Start date: "  + currentEvent[0].dates.start.localDate
+                            url.href = currentEvent[0].url
+                            url.innerHTML = "Event URL"
+                        }
+                })
+        } 
+    }
+}
 
 let weatherSearch = function(param){
     forecast.empty()
@@ -83,14 +174,17 @@ let weatherSearch = function(param){
 
 }
 
-
+$("#searchButton").click(function(){
+    weatherSearch(query.val());
+    eventSearch(query.val());
+})
 
 // For Event Api
 
 var cityfetch = "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=IsHdraDgQ6AybSMTXCgWdC4WQFWUkgBn"
 
 const allcities = [
-    { number: 212, name: 'abilene' },
+  { number: 212, name: 'abilene' },
   { number: 213, name: 'albany' },
   { number: 214, name: 'albany, GA' },
   { number: 215, name: 'albuquerque' },
@@ -134,33 +228,33 @@ const allcities = [
   { number: 253, name: 'cleveland' },
   { number: 254, name: 'colorado springs' },
   { number: 255, name: 'columbia'},
-{ number: 259, name: 'columbus' },
-{ number: 260, name: 'corpus christi' },
-{ number: 261, name: 'dallas' },
-{ number: 262, name: 'davenport' },
-{ number: 263, name: 'dayton' },
-{ number: 264, name: 'denver' },
-{ number: 265, name: 'des moines' },
-{ number: 266, name: 'detroit' },
-{ number: 267, name: 'dothan' },
-{ number: 268, name: 'duluth' },
-{ number: 269, name: 'el paso' },
-{ number: 270, name: 'elmira' },
-{ number: 271, name: 'erie' },
-{ number: 272, name: 'eugene' },
-{ number: 273, name: 'eureka' },
-{ number: 274, name: 'evansville' },
-{ number: 275, name: 'fairbanks' },
-{ number: 276, name: 'fargo' },
-{ number: 277, name: 'flint' },
-{ number: 278, name: 'florence' },
-{ number: 279, name: 'fort myers' },
-{ number: 280, name: 'fort smith' },
-{ number: 281, name: 'fort wayne' },
-{ number: 282, name: 'fresno' },
-{ number: 283, name: 'gainesville' },
-{ number: 284, name: 'glendive' },
-{ number: 285, name: 'grand junction' },
+  { number: 259, name: 'columbus' },
+  { number: 260, name: 'corpus christi' },
+  { number: 261, name: 'dallas' },
+  { number: 262, name: 'davenport' },
+  { number: 263, name: 'dayton' },
+  { number: 264, name: 'denver' },
+  { number: 265, name: 'des moines' },
+  { number: 266, name: 'detroit' },
+  { number: 267, name: 'dothan' },
+  { number: 268, name: 'duluth' },
+  { number: 269, name: 'el paso' },
+  { number: 270, name: 'elmira' },
+  { number: 271, name: 'erie' },
+  { number: 272, name: 'eugene' },
+  { number: 273, name: 'eureka' },
+  { number: 274, name: 'evansville' },
+  { number: 275, name: 'fairbanks' },
+  { number: 276, name: 'fargo' },
+  { number: 277, name: 'flint' },
+  { number: 278, name: 'florence' },
+  { number: 279, name: 'fort myers' },
+  { number: 280, name: 'fort smith' },
+  { number: 281, name: 'fort wayne' },
+  { number: 282, name: 'fresno' },
+  { number: 283, name: 'gainesville' },
+  { number: 284, name: 'glendive' },
+  { number: 285, name: 'grand junction' },
 { number: 286, name: 'grand rapids' },
 { number: 287, name: 'great falls' },
 { number: 288, name: 'green bay' },
@@ -301,47 +395,37 @@ const allcities = [
 
 
 
-let eventSearch = function() {
-    console.log("i kind of work");
-    for (var i = 0; i < allcities.length; i++) {
-        var tempcityname = $('#query').val().toLowerCase();
-        if (tempcityname === allcities[i].name) {
-            console.log("i work");
-            console.log(allcities[i]);
-            citynum = allcities[i].number;
-            fetch("https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=" + citynum + "&apikey=IsHdraDgQ6AybSMTXCgWdC4WQFWUkgBn")
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    console.log(data._embedded.events);
-                    console.log(data);
-                    var tempevent = [];
-                    for (var i = 0; i < 30; i++) {
-                        if (i === 0) {
-                            tempevent.push(data._embedded.events[i].name);
-                            continue;
-                        }  
-                            for (var j = 0; j < tempevent.length; j++) {
-                                if (tempevent.includes(data._embedded.events[i].name)) {
-                                    data._embedded.events.splice(i, 1);
-                                } else {
-                                    tempevent.push(data._embedded.events[i].name);
-                                }
-                            }
-                        console.log(tempevent);    }
-                })
-        } else {
-            console.log("not a valid city");
-        }
-    }
-}
 
-
-// for on load example 
 
 window.addEventListener('load', function() {
-    weatherSearch("salt lake city");
-    eventSearch("salt lake city");
+    getLocalStorage();
+    weatherSearch("boston");
+    eventSearch("boston");
+    
+    $('#cityname').text("boston");
+
+    var loadfavs = JSON.parse(localStorage.getItem("favorites"));
+    for (i = 0; i < loadfavs.length; i++) {
+        let localcitycard = document.createElement("div");
+        let localcityname = document.createElement("a");
+
+        localcitycard.classList.add("item");
+        localcityname.classList.add("favlinks");
+
+        localcitycard.appendChild(localcityname);
+
+        $('#favorites').append(localcitycard);
+        localcityname.append(loadfavs[i]);
+    }
+
+})  
+// for on load example 
+$('#favorites').click(function(event) {
+    var target =event.target
+    if(target.tagName === "A"){
+        weatherSearch(target.textContent)
+        eventSearch(target.textContent)
+    }
+   
 })
 
