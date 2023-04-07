@@ -53,8 +53,6 @@ header {
     text-align: center;
     padding: 2%;
     color:#00FFFF;
-    text-shadow: 3px 0 black, 0 3px black, 0px 0 black , 3px -2px black;
-    
 }
 
 .herosearch {
@@ -94,8 +92,17 @@ color:#00FFFF ;
     display:flex;
     position: static;
 }
+
+.favlinks  {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
 #star:hover{
 opacity: 100%;
+cursor: pointer;
 }
 
 @media screen and (max-width: 760px) {
