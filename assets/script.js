@@ -9,11 +9,6 @@ let query = $("#query")
 
 var recentcity = [];
 
-// $("#searchButton").click(function(event) {
-//     event.preventDefault();
-//     recentcity = $('#query').val();
-//     $('#cityname').text($('#query').val());
-// })
 
 let getLocalStorage = function(){
     var tempStorage = localStorage.getItem("favorites")
@@ -23,7 +18,14 @@ let getLocalStorage = function(){
     return JSON.parse(localStorage.getItem("favorites"))
 }
 
+reset.click(function(){
+    clearStorage();
+})
 
+let clearStorage = function(){
+    localStorage.clear()
+    favorites.innerHTML = ""
+}
 
 $("#star").click(function(event) {
     event.preventDefault();
@@ -42,14 +44,7 @@ $("#star").click(function(event) {
     localcityname.append($('#query').val());
 })
 
-  
 
-
-
-// reset.click(function(){
-//     favcities = ""
-//     localStorage.setItem("favorites", favcities)
-// })
 
 
 
@@ -103,6 +98,7 @@ let eventSearch = function(param) {
                             div3.classList.add("content")
                             div4.classList.add("header")
                             div5.classList.add("description")  
+                            url.classList.add("eventlinks")
                             div1.append(div2)
                             div2.append(div3)
                             div3.append(div4)
@@ -177,6 +173,7 @@ let weatherSearch = function(param){
 $("#searchButton").click(function(){
     weatherSearch(query.val());
     eventSearch(query.val());
+    $('#cityname').text(query.val());
 })
 
 // For Event Api
