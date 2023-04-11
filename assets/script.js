@@ -399,7 +399,7 @@ window.addEventListener('load', function() {
     weatherSearch("boston");
     eventSearch("boston");
     
-    $('#cityname').text("boston");
+    $('#cityname').text("Boston");
 
     var loadfavs = JSON.parse(localStorage.getItem("favorites"));
     for (i = 0; i < loadfavs.length; i++) {
@@ -422,7 +422,7 @@ $('#favorites').click(function(event) {
     if(target.tagName === "A"){
         weatherSearch(target.textContent)
         eventSearch(target.textContent)
+        $('#cityname').text(target.textContent)
     }
-   
 })
 
