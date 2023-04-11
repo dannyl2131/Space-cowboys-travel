@@ -15,7 +15,7 @@ Thank you to the TA's and bootcamp team for helping us fix bugs, and dozens of o
 N/A
 
 # Screenshot 
-
+![image](https://user-images.githubusercontent.com/122936256/231048897-455c299c-514f-4a2a-849e-3b55a7e81f23.png)
 
 # Link to Site
 https://dannyl2131.github.io/Space-cowboys-travel/
