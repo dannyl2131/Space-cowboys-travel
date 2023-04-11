@@ -124,7 +124,7 @@ let eventSearch = function(param) {
 let weatherSearch = function(param){
     forecast.empty()
     events.empty()
-    fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + param + "&units=imperial&appid=7cfd96e09578686d48a4d422e2ebfb44")
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + param + "&units=imperial&appid=7cfd96e09578686d48a4d422e2ebfb44")
     .then(function(response){
         return response.json();
     })
